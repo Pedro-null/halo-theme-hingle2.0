@@ -16,6 +16,7 @@
 如果已经下载压缩包安装了，也可以在博客后台 “主题 > Hingle > ...更多 > 在线更新” 就能实时更新到最新的版本
 
 - https://gitee.com/PedroNull/halo-theme-hingle2.0.git
+- https://github.com/Pedro-null/halo-theme-hingle2.0.git
 
 
 #### 参与贡献
