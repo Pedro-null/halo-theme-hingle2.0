@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+    th:replace="~{module/macro :: html(title = '归档' + ${site.title}, head = ~{::head}, content = ~{::content})}">
+
+    <th:block th:fragment="head">
+        <head>
+            <link rel="stylesheet" th:href="@{/assets/css/archives.css?v={version}(version=${theme.spec.version})}" />
+        </head>
+    </th:block>
+
+    <th:block th:fragment="content">
+
+        <main>
+            <div class="wrap min">
+                <section class="page-title">
+                    <h1>归档</h1>
+                </section>
+
+                <section class="post-archive">
+                    <th:block th:each="archive : ${archives.items}">
+                        <h2 th:text="${archive.year}"></h2>
+                        <ul class="listing">
+                            <th:block th:each="month : ${archive.months}">
+                                <li th:each="post : ${month.posts}"><span class="date" th:text="${#dates.format(post.spec.publishTime, 'yyyy年MM月dd日')}"></span><a th:href="@{${post.status.permalink}}" th:text="${post.spec.title}"></a></li>
+                            </th:block>
+                        </ul>
+
+                    </th:block>
+                </section>
+
+                <!-- 分页 -->
+                <section class="page-navigator">
+                    <a th:if="${archives.hasPrevious()}" class="extend prev" rel="prev" th:href="@{${archives.prevUrl}}">«</a>
+                    <span class="page-number current" th:text="${archives.page}"></span>
+                    <a th:if="${archives.hasNext()}" class="extend next" rel="next" th:href="@{${archives.nextUrl}}">»</a>
+                </section>
+            </div>
+        </main>
+
+    </th:block>
+
+</html>

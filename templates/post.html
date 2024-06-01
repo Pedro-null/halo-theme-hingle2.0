@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+    th:replace="~{module/macro :: html(title = ${post.spec.title} + '-' + ${site.title}, head = ~{::head}, content = ~{::content})}">
+<th:block th:fragment="head">
+
+    <script>isPost = true;</script>
+
+    <th:block th:if="${theme.config.genernal.KaTex_plugin}">
+        <link rel="stylesheet"
+            th:href="@{/assets/plugins/katex/dist/katex.min.css?v={version}(version=${theme.spec.version})}">
+        <script th:src="@{/assets/plugins/katex/dist/katex.min.js?v={version}(version=${theme.spec.version})}"></script>
+    </th:block>
+
+    <link rel="stylesheet"
+    th:href="@{https://cdn.staticfile.org/highlight.js/10.0.0/styles/{css}(css=${theme.config.genernal.code_css})}">
+</th:block>
+
+<th:block th:fragment="content">
+    <main>
+        <div class="wrap min">
+            <section class="post-title">
+                <h2 th:text="${post.spec.title}"></h2>
+                <div class="post-meta">
+                    <time class="date" th:text="${#dates.format(post.spec.publishTime, 'yyyy.MM.dd')}"></time>
+
+                    <th:block th:if="${not #lists.isEmpty(post.categories)}">
+                        <span class="category">
+                            <th:block th:each="category : ${post.categories}">
+                                <a th:href="${category.status.permalink}" th:text="${category.spec.displayName}"></a>
+                            </th:block>
+                        </span>
+                    </th:block>
+
+                    <span class="view" th:text="${post.stats.visit}"></span>
+
+                </div>
+            </section>
+            <article class="post-content" th:utext="${post.content.content}">
+                <!-- <blockquote>这篇文章上次修改于 <%= Math.ceil((moment().unix() - page.date.unix()) / 86400) %> 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote> -->
+            </article>
+            <section class="post-near" th:with="postCursor = ${postFinder.cursor(post.metadata.name)}">
+                <ul>
+
+                    <th:block th:if="${postCursor.hasPrevious()}">
+                        <li>上一篇: <a th:href="@{${postCursor.previous.status.permalink}}"
+                                th:text="${postCursor.previous.spec.title}"></a></li>
+                    </th:block>
+                    <th:block th:unless="${postCursor.hasPrevious()}">
+                        <li>上一篇: 看完啦 (つд⊂)</li>
+                    </th:block>
+                    <th:block th:if="${postCursor.hasNext()}">
+                        <li>下一篇: <a th:href="@{${postCursor.next.status.permalink}}"
+                                th:text="${postCursor.next.spec.title}"></a></li>
+                    </th:block>
+                    <th:block th:unless="${postCursor.hasNext()}">
+                        <li>下一篇: 看完啦 (つд⊂)</li>
+                    </th:block>
+                </ul>
+            </section>
+
+            <th:block th:if="${not #lists.isEmpty(post.tags)}">
+                <section class="post-tags">
+                    <th:block th:each="tag : ${post.tags}">
+                        <a class="-none-link" rel="tags" th:href="${tag.status.permalink}"
+                            th:text="${tag.spec.displayName}"></a>
+                    </th:block>
+                </section>
+            </th:block>
+
+            <!-- 作者寄语 -->
+            <th:block th:if="${theme.config.genernal.author_text} != null">
+                <section class="post-author">
+                    <figure class="author-avatar">
+                        <img th:href="@{${site.logo}}" />
+                    </figure>
+                    <div class="author-info">
+                        <h4 th:text="${site.title}"></h4>
+                        <p th:text="${theme.config.genernal.author_text}"></p>
+                    </div>
+                </section>
+            </th:block>
+
+            <!-- 需要判断当前评论组件是否满足显示的条件，这个变量可能是是否安装评论插件、文章是否开启评论等条件的组合 -->
+            <div id="halo-comment" th:if="${haloCommentEnabled}">
+
+                <script>
+                    var onli;
+                    if (document.cookie.indexOf("night") !== -1) {
+                        if (document.cookie.indexOf("night=true") !== -1) {
+                            onli = 'dark';
+                        }
+                    } else {
+                        onli = 'light'
+                    }
+                </script>
+                <halo:comment group="content.halo.run" kind="Post" th:attr="name=${post.metadata.name}"
+                    colorScheme="onli" />
+            </div>
+
+        </div>
+        <th:block th:replace="~{module/hightlight}" />
+    </main>
+    
+
+</th:block>
+
+</html>

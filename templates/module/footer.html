@@ -1,0 +1,31 @@
+<footer>
+    <style>
+        .mdui-img-circle {
+            border-radius: 50%;
+            }
+    </style>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="sub-footer">
+            <div align="left">
+                <img class="mdui-img-circle" height="24" width="24" th:src="@{${site.logo}}">
+                <a th:text="${site.title}"></a>
+                <div>© <span id="timeyear" th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy')}"></span> <a href="https://beian.miit.gov.cn/" target="_blank" th:text="${theme.config.genernal.icp}"></a></div>
+                <div>Powered by <a href="https://halo.run/" target="_blank">Halo</a>. Theme <a href="https://github.com/Pedro-null/halo-theme-Hingle" target="_blank">Hingle</a> by <a href="https://www.pedronull.xyz/" target="_blank">pedronull</a>.</div>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- <halo:footer /> -->
+</footer>
+
+<script th:src="@{/assets/js/kico.js?v={version}(version=${theme.spec.version})}"></script>
+<script th:src="@{/assets/js/hingle.js?v={version}(version=${theme.spec.version})}"></script>
+<script th:inline="javascript"> 
+    let config = JSON.stringify({night: /*[[${theme.config.genernal.night}]]*/, copyright: /*[[${theme.config.genernal.copyright}]]*/});
+    var hingle = new Paul_Hingle(config);
+</script>
+

@@ -1,0 +1,20 @@
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: pedro_hingle2.0
+spec:
+  displayName: Hingle2.0
+  author:
+    name: Pedro
+    website: https://www.pedronull.xyz
+  description: 🎈 一个简洁大气，含夜间模式的 halo 博客主题
+  logo: http://cdn.sep.cc/avatar/e2d1f9c5da125994d7bf02c691e3124a?s=256&d=identicon
+  homepage: https://github.com/Pedro-null/halo-theme-hingle-2.0
+  repo: https://gitee.com/PedroNull/halo-theme-hingle-2.0
+  settingName: "theme-Hingle-setting"
+  configMapName: "theme-Hingle-configMap"
+  version: 2.0.0
+  requires: 2.0.0
+  license:
+    - name: "MIT"
+      url: "https://github.com/Pedro-null/halo-theme-hingle-2.0/blob/main/LICENSE"

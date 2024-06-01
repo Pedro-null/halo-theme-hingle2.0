@@ -1,0 +1,27 @@
+<header>
+
+    <script>
+        if(document.cookie.indexOf("night=true") !== -1){
+            document.body.classList.remove("light");
+            document.body.classList.add("dark-theme", "color-scheme-dark");
+        }
+        else{
+            document.body.classList.remove("dark-theme", "color-scheme-dark");
+            document.body.classList.add("light");
+        }
+    </script>
+
+    <div class="head-title">
+        <h4 th:text="${title}"></h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <th:block th:if="${pluginFinder.available('PluginSearchWidget')}">
+            <a class="search-btn" href="javascript:SearchWidget.open()"></a>
+        </th:block>
+    </div> 
+
+    <th:block th:replace="~{module/menu}" />
+
+</header>
