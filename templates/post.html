@@ -11,8 +11,9 @@
         <script th:src="@{/assets/plugins/katex/dist/katex.min.js?v={version}(version=${theme.spec.version})}"></script>
     </th:block>
 
-    <link rel="stylesheet"
-    th:href="@{https://cdn.staticfile.org/highlight.js/10.0.0/styles/{css}(css=${theme.config.genernal.code_css})}">
+    <link rel="stylesheet" th:href="@{https://cdn.staticfile.org/highlight.js/11.9.0/styles/{css}(css=${theme.config.genernal.code_css})}">
+    <script src="https://cdn.staticfile.org/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </th:block>
 
 <th:block th:fragment="content">
@@ -98,7 +99,6 @@
             </div>
 
         </div>
-        <th:block th:replace="~{module/hightlight}" />
     </main>
     
 
