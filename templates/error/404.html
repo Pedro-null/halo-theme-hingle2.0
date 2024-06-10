@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+    th:replace="~{module/macro :: html(title = '404'  + '-' + ${site.title}, head=null, content = ~{::content})}">
+
+<th:block th:fragment="content">
+    <main>
+        <div class="wrap">
+            <div class="error-page">
+                <h1>404</h1>
+                <p>找不到页面啦</p>
+                <img th:src="@{/assets/images/404.png}" />
+            </div>
+        </div>
+    </main>
+</th:block>
+
+</html>

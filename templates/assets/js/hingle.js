@@ -27,8 +27,8 @@ var Paul_Hingle = function (config) {
 
     // 关灯切换
     this.night = function () {
-        //如果开启了评论
-        if (document.getElementById("halo-comment")){
+        //如果开启了评论组件，且评论组件没更新的话
+        if (document.getElementById("halo-comment") && document.querySelector("div#halo-comment > div > div")){
             var comment_on = true;
             var ii = document.querySelector("div#halo-comment > div > div");
             var comment_box = ii.shadowRoot.querySelector("div.halo-comment-widget");
