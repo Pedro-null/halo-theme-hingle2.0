@@ -581,7 +581,11 @@ article h1:before{ font-weight: bold }
     vertical-align: middle;
 }
 
-.post-author img{ border-radius: 66% }
+.post-author img{
+    border-radius: 66%;
+    width: 5em;
+    height: 5em;
+}
 
 .post-author .author-info{ margin-left: 1.5em }
 
